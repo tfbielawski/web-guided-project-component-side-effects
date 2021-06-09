@@ -21,7 +21,7 @@ export default function Details(props) {
   // On success, shove the details of the friend in `details` slice of state
 
   useEffect(() => {
-    /** @todo figure out with this is getting regenerator error */
+    /** @todo babel not configured, this won't work unless you have .babelrc file with async/await plugin */
     // async function fetchFriends() {
     //   try {
     //     const responseFromAxios = await axios.get(`${BASE_URL}/friends/${friendId}?api_key=${API_KEY}`)
@@ -44,7 +44,7 @@ export default function Details(props) {
   useEffect(() => {
     btnRef.current.addEventListener('click', () => {
       console.log('closeBtn clicked')
-      // close()
+      close()
     })
 
     return () => {
