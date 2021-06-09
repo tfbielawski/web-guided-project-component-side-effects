@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { BASE_URL, API_KEY } from '../constants'
 import axios from 'axios'
 
 export default function Details(props) {
+  const btnRef = useRef()
   const { friendId, close } = props
   const [details, setDetails] = useState(null)
 
@@ -39,6 +40,22 @@ export default function Details(props) {
         console.log(err)
       })
   }, [friendId])
+
+  useEffect(() => {
+    btnRef.current.addEventListener('click', () => {
+      console.log('closeBtn clicked')
+      // close()
+    })
+
+    return () => {
+      console.log('removing the event listener')
+      console.log(btnRef)
+      btnRef.current.removeEventListener('click', () => {
+        console.log('closeBtn clicked')
+        close()
+      })
+    }
+  }, [])
   return (
     <div className='container'>
       <h2>Details (of friend with id {friendId}):</h2>
@@ -53,7 +70,7 @@ export default function Details(props) {
           </ul>
         </>
       }
-      <button onClick={close}>Close</button>
+      <button ref={btnRef}>Close</button>
     </div>
   )
 }
