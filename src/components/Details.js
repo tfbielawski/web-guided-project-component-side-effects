@@ -19,6 +19,26 @@ export default function Details(props) {
   // The URL should end up looking like `http://localhost:4000/friends/1?api_key=xyz`
   // On success, shove the details of the friend in `details` slice of state
 
+  useEffect(() => {
+    /** @todo figure out with this is getting regenerator error */
+    // async function fetchFriends() {
+    //   try {
+    //     const responseFromAxios = await axios.get(`${BASE_URL}/friends/${friendId}?api_key=${API_KEY}`)
+    //     console.log(responseFromAxios)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // }
+    // fetchFriends()
+
+    axios.get(`${BASE_URL}/friends/${friendId}?api_key=${API_KEY}`)
+      .then(res => {
+        setDetails(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [friendId])
   return (
     <div className='container'>
       <h2>Details (of friend with id {friendId}):</h2>
